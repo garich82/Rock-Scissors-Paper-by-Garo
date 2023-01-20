@@ -6,9 +6,10 @@ Console.WriteLine("Remember, rock smashes scissors, scissors cuts paper and pape
 Console.WriteLine("First one to reach 3 points is the winner!!!");
 int playerScore = 0;
 int computerScore = 0;
-int maxScore = 0;
-while (maxScore < 3)
+// The main loop is executed until someone reaches the target score.
+while (!(playerScore == 3 || computerScore == 3))
 {
+    // This loop is being executed until player enters valid choice: p, r or s.
     char playersChoice = ' ';
     while (true)
     {
@@ -28,6 +29,7 @@ while (maxScore < 3)
         else
             break;
     }
+    // Randomizing computer's choice. Random int: 0 for [R]ock, 1 for [S]cissors and 2 for [P]aper.
     var rand = new Random();
     int computersChoiceInt = rand.Next(3);
     char computersChoice = ' ';
@@ -50,6 +52,7 @@ while (maxScore < 3)
             break;
 
     }
+    // Deciding who wins the current round.
     if (computersChoice == playersChoice)
         Console.WriteLine("No one wins. Try again!");
     else if (computersChoice == 'r' && playersChoice == 's' || computersChoice == 's' && playersChoice == 'p'
@@ -63,22 +66,16 @@ while (maxScore < 3)
         Console.WriteLine("Congratulations! You win!");
         playerScore += 1;
     }
+    // Printing the current result.
     Console.Write("Current result is: ");
     if (computerScore > playerScore)
-    {
         Console.WriteLine($"{computerScore}:{playerScore} for Computer!");
-        maxScore = computerScore;
-    }
     else if (computerScore < playerScore)
-    {
         Console.WriteLine($"{playerScore}:{computerScore} for Player");
-        maxScore = playerScore;
-    }
     else
-    {
-        Console.WriteLine($"{playerScore}:{computerScore} tie");
-    }
+        Console.WriteLine($"{playerScore}:{computerScore} tie")
 }
+// Printing the final result.
 Console.WriteLine();
 Console.Write("And the winner is: ");
 if (computerScore == 3)
